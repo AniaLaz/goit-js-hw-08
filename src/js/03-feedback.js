@@ -5,8 +5,8 @@ const formEl = document.querySelector("form");
 const emailEl = document.querySelector("input");
 const textareaEl = document.querySelector("textarea");
 
-
 formEl.addEventListener('input', onFeedback)
+// formEl.addEventListener('input', throttle(onFeedback,500))
 formEl.addEventListener('submit', onSubmit)
 
 
@@ -20,7 +20,6 @@ function onFeedback(event) {
     message : message.value
     }
     setLocalStorage(feedback);
-// localStorage.setItem("feedback-form-state",JSON.stringify(feedback))
 }
 
 function setLocalStorage(feedback) {
