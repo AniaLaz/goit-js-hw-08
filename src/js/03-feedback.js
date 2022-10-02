@@ -5,15 +5,15 @@ const formEl = document.querySelector("form");
 const emailEl = document.querySelector("input");
 const textareaEl = document.querySelector("textarea");
 
-formEl.addEventListener('input', onFeedback)
-// formEl.addEventListener('input', throttle(onFeedback,500))
+// formEl.addEventListener('input', onFeedback)
+formEl.addEventListener('input', throttle(onFeedback,500))
 formEl.addEventListener('submit', onSubmit)
 
 
 function onFeedback(event) {
     event.preventDefault();
        
-    const {email,message} = event.currentTarget.elements;
+    const {email,message} = event.target.elements;
     const feedback = 
     {
     email : email.value,
@@ -36,10 +36,15 @@ emailEl.value = result.email;
 
 function onSubmit(e){
     e.preventDefault();
-    console.log(JSON.parse(localStorage.getItem("feedback-form-state")));
-    textareaEl.value = " ";
-    emailEl.value = " ";
-    localStorage.removeItem("feedback-form-state");   
+    if (textareaEl.value !== " " || emailEl.value !== "")
+    {
+        console.log(JSON.parse(localStorage.getItem("feedback-form-state")));
+        textareaEl.value = " ";
+        emailEl.value = " ";
+        localStorage.removeItem("feedback-form-state");  
+    }
+    else{alert('Заповніть всі поля')}
+     
 };
 
 
